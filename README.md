@@ -48,7 +48,7 @@ my_list to my_list + ["another"];       //the '+' operator will join the lists
 
 ### Foreach statement
 
-### Lists
+### Objects
 ```c++
 //defining tables
 define my_table to table:               //create a type of object
@@ -61,7 +61,7 @@ end
 first of my_table = 2;
 ```
 
-### Objects
+### Lists
 
 ```c++
 //defining lists
