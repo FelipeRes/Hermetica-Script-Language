@@ -41,6 +41,26 @@ my_list to my_list + ["another"];       //the '+' operator will join the lists
 ```
 
 ### If statement
+The **if** statement works exactly like a **python language** and have the current sintax:
+> _if_ \<logical expression\> _then_ \<statement\>
+>
+> if \<logical expression\> _then_ \<statement\> _else_ \<statement\>
+
+Use a block to if statement is optional, check the examples:
+```javascript
+//some times if statements can be written almost literally
+if power of card < 10 then remove [card];
+
+// if the card has the id 10, put it in the arena or draw a card
+if cardId is 10 then manifest [cardId] else draw;
+
+if (target == 2) then :
+    remove this;
+    power of targert to 10;
+end
+
+```
+Observe that you can make **else if** by put a if immediately after the else because if is a statement.
 
 ### While statement
 
@@ -97,23 +117,7 @@ end
 Improve [card,3];   //power of card increase to 3;
 Improve [card];     //sintax error, functions gets error because value does not exist
 ```
-Spells can return values intead of end.
-```c++
-//defining a spell with arguments
-define Pow to spell [value, expoent] : return value**expoent;
 
-//calling spell with parameters
-define result to Pow [2,2];
-```
-Spell can return other spells
-```c++
-//defining a spell with arguments
-define CreatePrint to spell [text] : return spell : print[text]; 
-
-//calling spell with parameters
-define myPrint to CreatePrint["hellow word"];
-myPrint;
-```
 
 ## Environment
 
