@@ -11,33 +11,73 @@ Language designed to interpret the effect cards of Hermetica Game.
 - **text**   : list of character and any text inside quotation marks
 - **nil**    : the result of incompatible operations or not initialized variables.
 - **list**   : a list of numbers, text, anything.
-- **object** : group of key-values pair of text and anything.
+- **boolean**: a value that can be true or false.
+- **entity** : group of key-values pair of text and anything.
 
 ### Assign values
-Assign is an statement that creates a new variable or sets a value to an already existent variable. 
+Assign is an statement that defines a new variable or sets a value to an already existent variable. While you defines a new variable, you can set a value optionaly. The type of variables are iferred by the type of the value or expression used.  
 To create a variable, use the sintax:
+
 > _define_ \<identifier\>;
 >
->  _define_ \<identifier\> _to_ \<value\>;
->
->  _define_ \<identifier\> = \<value\>;
+>  _define_ \<identifier\> _to_ \<expression\>;
 
 Examples:
 
 ```c++
-define my_variable;                     //recive nil as value
-define my_number to 10;                 //number are only integer
-define my_text to "Card Name";          //text is inside double quote
-define my_list to [0,1,"word",myText];  //list can be have any object
-define my_object to object:               //create a type of object
-    first to 1,
-    second to 2,
-    third to 3
+define variable;                     //recive nil as value
+define number to 10;                 //number are only integer
+define text to "Card Name";          //text is inside double quote
+define key to true;                  //boolean values can be only true or false
+
+define object to entity:             //create a type of object
+    first to "one",
+    second to "two",
+    third to "three"
 end
 
-my_number to 10 + 20;                   //my_number value turn to 30
-my_string to "hello" + " word";         //concat the values "hello word
-my_list to my_list + ["another"];       //the '+' operator will join the lists
+define a to 10;
+define b to 20;
+define c to a + b;                   //assign by expression
+
+first of object = c;                 //changes the type from text to number
+
+define a to nil;                     //means that a does not have any value
+
+```
+The variables can have theirs values changed to any value.
+
+### Lists
+Lists area group of any values. 
+```c++
+//defining lists
+define values to ["one","two","three"];  //you can define a list with comma separeted values
+
+//lists can have any value
+values to [1,"text",true,["other_list"]]; 
+
+//reading lists
+print #1 from values;                   //out the first value from list
+print #2 from values;                   //out the seconde value from list
+print #1 from values + #2 from values;  //out the sum of first and second value from list
+
+//getting the size of the list
+defines list_size to size of the list;
+
+//push values to list end of list
+add 1 to values;
+add cat to cats;
+add word to text at the end;
+add word to text at the top;
+add word to text at #3;
+
+//pop get something in a list by a index and remove it from list
+define something to pop #3 from values;
+
+//remove vales from list
+remove #1 from values;
+remove first from values;
+remove last from values;
 ```
 
 ### If statement
@@ -81,18 +121,7 @@ end
 first of my_table = 2;
 ```
 
-### Lists
 
-```c++
-//defining lists
-define values to ["first","second","third"];
-
-//reading lists
-first to #1 from values;
-second to #2 from values;
-third to #1 from values + #2 from values;
-splice = #1 to 10 from values
-```
 
 ### Spells
 Spells are blocks of statements that can be called in other parts of the code. Spells can recive paremeters to modify the spell acting.
@@ -109,7 +138,7 @@ spell Kill;          //prints "you died";
 Spells can recive a list of optional arguments. If you create a list before spell block, this list can recive external values that will be cloned to a list environment. If the arguments type not match with the the spell application, you can get error. 
 ```c++
 //defining a spell with arguments
-define Improve to spell [card, value]:
+define Improve to spell to list card, value:
     power of card to + value;
 end
 
