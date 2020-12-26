@@ -2,7 +2,7 @@
 Language designed to interpret the effect cards of Hermetica Game. This language is similar to english to facilitate complexity of programming cards effect to non-programmers.
 The programming logic is the same of other programming languages, but the sintax has a lot of prepositions to look like a human speaking.
 ```c++
-show "hello 
+show "hello magician";
 ```
 
 ## Introduction
