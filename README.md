@@ -31,27 +31,20 @@ define number to 10;                 //number are only integer
 define text to "Card Name";          //text is inside double quote
 define key to true;                  //boolean values can be only true or false
 
-define object to entity:             //create a type of object
-    first is "one",
-    second is "two",
-    third is "three"
-end
-
-define a to 10;
-define b to 20;
+define a to 10;                      //define with expressions
+define b to 20;                      
 define c to a + b;                   //assign by expression
 
 first of object = c;                 //changes the type from text to number
 
 define a to nil;                     //means that a does not have any value
-
 ```
 The variables can have theirs values changed to any value.
 
 ### Lists
 Lists area group of nil or any values. 
+Defining lists:
 ```c++
-//defining lists
 define values to ["one","two","three"];  //you can define a list with comma separeted values
 ```
 Lists can have any value:
@@ -92,22 +85,26 @@ Entities are an abstract representation of a concept. They have a name and a lis
 
 ```c++
 //defining entities
-define apple to entity:               //create a type of object
+define apple to entity:
     color is "red",             
     taste is "sweet"
 end
-
-//reading entities values
+```
+Reading entities values:
+```c++
 define color to color of apple;
 show color;     //out "red"
-
-//write values in entities
-color of apple to green;
-
-//inserting a new attribute to entity
+```
+Set other values in attributes of entities:
+```c++
+color of apple to "green";
+```
+Inserting a new attribute to entity
+```c++
 add "small" to apple as "size";
-
-//remove a attrivute of entity
+```
+Removing a attribute of entity
+```c++
 remove "taste" of apple;
 ```
 
