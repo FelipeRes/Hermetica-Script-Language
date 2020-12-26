@@ -1,5 +1,6 @@
 # Hermetica-Script-Language
-Language designed to interpret the effect cards of Hermetica Game.
+Language designed to interpret the effect cards of Hermetica Game. This language is similar to english to facilitate complexity of programming cards effect to non-programmers.
+The programming logic is the same of other programming languages, but the sintax has a lot of prepositions to look like a human speaking.
 
 ## Introduction
 
@@ -31,9 +32,9 @@ define text to "Card Name";          //text is inside double quote
 define key to true;                  //boolean values can be only true or false
 
 define object to entity:             //create a type of object
-    first to "one",
-    second to "two",
-    third to "three"
+    first is "one",
+    second is "two",
+    third is "three"
 end
 
 define a to 10;
@@ -48,38 +49,69 @@ define a to nil;                     //means that a does not have any value
 The variables can have theirs values changed to any value.
 
 ### Lists
-Lists area group of any values. 
+Lists area group of nil or any values. 
 ```c++
 //defining lists
 define values to ["one","two","three"];  //you can define a list with comma separeted values
-
-//lists can have any value
+```
+Lists can have any value:
+```c++
 values to [1,"text",true,["other_list"]]; 
-
-//reading lists
-print #1 from values;                   //out the first value from list
-print #2 from values;                   //out the seconde value from list
-print #1 from values + #2 from values;  //out the sum of first and second value from list
-
-//getting the size of the list
+```
+Reading lists
+```c++
+show #1 from values;                   //out the first value from list
+show #2 from values;                   //out the seconde value from list
+show #1 from values + #2 from values;  //out the sum of first and second value from list
+```
+Getting the size of the list
+```c++
 defines list_size to size of the list;
-
-//push values to list end of list
+```
+Push values to list an define positions. The default position is the end of list.
+```c++
 add 1 to values;
 add cat to cats;
 add word to text at the end;
 add word to text at the top;
 add word to text at #3;
-
-//pop get something in a list by a index and remove it from list
-define something to pop #3 from values;
-
-//remove vales from list
+```
+Remove values from list
+```c++
 remove #1 from values;
 remove first from values;
 remove last from values;
 ```
+You can use pop function to get the value and remove the list at the same time.
+```c++
+define first_value to pop #1 from values;
+```
+### Entities
+Entities are an abstract representation of a concept. They have a name and a list of unique attributes. A entity can't have two attributes with the same name, so it work like a dictonary. Sintax:
+> _table:_ \<attribute\> _is_ \<expression\>, \<attribute\> _is_ \<value\> ... end
 
+```c++
+//defining entities
+define apple to entity:               //create a type of object
+    color is "red",             
+    taste is "sweet"
+end
+
+//reading entities values
+define color to color of apple;
+show color;     //out "red"
+
+//write values in entities
+color of apple to green;
+
+//inserting a new attribute to entity
+add "small" to apple as "size";
+
+//remove a attrivute of entity
+remove "taste" of apple;
+```
+
+## Flow control
 ### If statement
 The **if** statement works exactly like a **python language** and have the current sintax:
 > _if_ \<logical expression\> _then_ \<statement\>
@@ -107,46 +139,6 @@ Observe that you can make **else if** by put a if immediately after the else bec
 ### For statement
 
 ### Foreach statement
-
-### Objects
-```c++
-//defining tables
-define my_table to table:               //create a type of object
-    first is 1,
-    second is 2,
-    third is 3
-end
-
-//reading lists
-first of my_table = 2;
-```
-
-
-
-### Spells
-Spells are blocks of statements that can be called in other parts of the code. Spells can recive paremeters to modify the spell acting.
-```c++
-//define a simple spell
-define Kill to spell:
-    life to 0;
-    print "you died";
-end
-
-//calling spell
-spell Kill;          //prints "you died";
-```
-Spells can recive a list of optional arguments. If you create a list before spell block, this list can recive external values that will be cloned to a list environment. If the arguments type not match with the the spell application, you can get error. 
-```c++
-//defining a spell with arguments
-define Improve to spell to list card, value:
-    power of card to + value;
-end
-
-//calling spell with parameters
-Improve [card,3];   //power of card increase to 3;
-Improve [card];     //sintax error, functions gets error because value does not exist
-```
-
 
 ## Environment
 
