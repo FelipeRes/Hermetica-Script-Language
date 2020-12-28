@@ -151,7 +151,7 @@ Example:
 while life <= 30 then life to + 1;
 while color of last from hand is not white then draw;
 ```
-'While' statements can operate blocks of statements: 
+**While** statements can operate blocks of statements: 
 ```javascript
 while size of arena_cards < 3 then:
     manifest first from deck;
@@ -160,7 +160,7 @@ while size of arena_cards < 3 then:
 end
 ```
 ### Foreach statement
-'Foreach' is a loop statemen for traversing items in a collection.
+**Foreach** is a loop statement for traversing items in a collection.
 Sintax:
 > _foreach_ \<identifiers\> _in_ \<list type\> then \<statement\>
 
@@ -169,7 +169,7 @@ Example:
 foreach card in hand then power of card to 0;
 foreach card in arena then if life of card < 3 then remove card;
 ```
-'Foreachs' can use with blocks too:
+**Foreachs** can use with blocks too:
 ```javascript
 foreach object in entities then:
     if color of object is blue then:
