@@ -133,7 +133,7 @@ if power of card < 10 then show card;
 ```
 Using a else examples:
 ```javascript
-if cardId is 10 then manifest cardId else draw;
+if cardId is 10 then manifest cardId; else draw;
 
 if (target == 2) then:
     remove this;
