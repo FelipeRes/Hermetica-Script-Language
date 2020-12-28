@@ -6,6 +6,12 @@ show "hello magician";
 ```
 
 ## Introduction
+Hermetica Script Language is a specific domain language to solve problems in Hermetica Card Game. _Can I use this language in other domains?_ Yes, you can! But you need to understand why this language exists. The main problem in Hermetica Card Game is how can I programming card effects without writing a specific method or function for each card in-game and how can I serialize these effect implementations to skip the problem that is building the code to each new card added? After study some open source code in community projects and check the all limitation tecnology, I concluded that the best solution is a specific script language to comunicate directly with the game core. This is the most difficult solution but is the most scalable solution for multiplatform games and the best way to maintain all of the control of the code, whithout any dependence of strange libraries and plugins. 
+
+With a specific language, we can use it to solve other problems like scripting tests and AI programming and we can serialize all of these things. This language was developed to use as a terminal language like python in a Linux console and the game has a special console that I can run hermetica lang commands and it will change the game at runtime. The syntax is simple and near the English to be used by any person that knows the minimum about programming. This language haven't floats for example, because the game doesn't use float to work. 
+
+The environment setup work with reflections to make the connection with the game core, so you can connect with you game too. 
+
 
 ## Sintax
 
