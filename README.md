@@ -140,6 +140,15 @@ if (target == 2) then:
     power of targert to 10;
 end
 ```
+Take care with else beacause you can use it to finish blocks:
+```javascript
+if cardId is 1 then:
+    if power of cardId is > 5 then:
+        show cardId;
+    else:
+        remove cardsId;
+    end
+end
 Observe that you can make **else if** by put a if immediately after the else because if is a statement.
 
 ### While statement
@@ -175,6 +184,6 @@ foreach object in entities then:
     if color of object is blue then:
         remove object
         draw
-    else then endturn;
+    else endturn;
 end
 ```
