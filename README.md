@@ -149,6 +149,7 @@ if cardId is 1 then:
         remove cardsId;
     end
 end
+```
 Observe that you can make **else if** by put a if immediately after the else because if is a statement.
 
 ### While statement
