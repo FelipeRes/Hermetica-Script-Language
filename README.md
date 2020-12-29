@@ -188,7 +188,7 @@ foreach object in entities then:
     else endturn;
 end
 ```
-## Get Stated
+## Get Started
 To use Hermetica Script Language in your game or application, you need only to setup a console. Check this unity example:
 ```c#
 using UnityEngine;
