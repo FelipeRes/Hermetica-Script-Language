@@ -10,7 +10,7 @@ Hermetica Script Language is a specific domain language to solve problems in Her
 
 With a specific language, we can use it to solve other problems like scripting tests and AI programming and we can serialize all of these things. This language was developed to use as a terminal language like python in a Linux console and the game has a special console that I can run hermetica lang commands and it will change the game at runtime. The syntax is simple and near the English to be used by any person that knows the minimum about programming. This language haven't floats for example, because the game doesn't use float to work. 
 
-The environment setup work with reflections to make the connection with the game core, so you can connect with you game too. 
+This language was development inside a Unity project, so the console to work with it is a game object. To setup your own console, use the _IConsole_ interface. The environment setup work with reflections to make the connection with the game core, so you can connect with you game too. 
 
 
 ## Sintax
@@ -188,3 +188,53 @@ foreach object in entities then:
     else endturn;
 end
 ```
+## Get Stated
+To use Hermetica Script Language in your game or application, you need only to setup a console. Check this unity example:
+```c#
+using UnityEngine;
+using HermeticaInterpreter;
+
+public class HermeticaConsole : MonoBehaviour, IConsole{
+
+    //setup the environment
+    HEnvironment environment;
+    HInterpreter interpreter;
+    
+    //initialize the enviroment and the console
+    public void Start(){
+        environment = new HEnvironment();
+        interpreter = new HInterpreter(environment,this);
+        interpreter.environment = environment;
+    }
+    
+    //a method to recive code inputs. You can create a visual console with a InputField that send the text to here. 
+    public void Read(string code){
+    
+        //initializing the pre processors.
+        HScanner scanner = new HScanner(input.text);
+        HParser parser = new HParser(scanner.scanTokens());
+        
+        //start to interpret
+        try{
+        
+            List<HStatement> statments = parser.parse();
+            
+            //if the parse gets error, the statements will be null
+            if(statments!=null){
+                interpreter.interpret(statments);
+            }
+            
+        }catch(System.Exception e){
+        
+            //show the exception
+            Show(e.Message);
+        }
+    }
+    
+    //the out put in log window of Unity. You can create a black window console with unity UI.
+    public void Show(string message){
+        Debug.Log(message);
+    }
+}
+```
+You can attach this component to any GameObject and type code or send strings to test.
