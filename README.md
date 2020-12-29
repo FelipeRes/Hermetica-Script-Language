@@ -207,7 +207,7 @@ public class HermeticaConsole : MonoBehaviour, IConsole{
         interpreter.environment = environment;
     }
     
-    //a method to recive code inputs. You can create a visual console with a InputField that send the text to here. 
+    //a method to recive code inputs. You can create a visual console with a InputField that send the text here. 
     public void Read(string code){
     
         //initializing the pre processors.
