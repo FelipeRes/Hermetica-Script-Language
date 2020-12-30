@@ -315,6 +315,9 @@ remove "power" from card;
 ```
 You can add a lot of objects to the environment and modify its properties easily at runtime. But there is a limitation of type, you can only change the value of int and string types. Future updates will add recursive search to any filed of object.
 
+Thank you to Robert Nystrom.
+[Crafting interpreters book](http://www.craftinginterpreters.com/)
+[Crafting interpreters repository](https://craftinginterpreters.com/)
 
 
 
