@@ -238,3 +238,89 @@ public class HermeticaConsole : MonoBehaviour, IConsole{
 }
 ```
 You can attach this component to any GameObject and type code or send strings to test.
+
+## Integration
+This language was created to communicate with a game core API. To understand more about read this [article](https://dev.to/feliperes/card-games-programming-1-game-core-4e8h) that I wrote. You can integrate your game by add your game core object to environmnet using the method _defineModel_.
+```c#
+HEnvironment environment;
+HInterpreter interpreter;
+
+//your game core reference
+GameCoreSample coreSample;
+
+public void Start(){
+
+    //initializing your game core
+    coreSample = new GameCoreSample();
+    
+    //initializing the enviroment and deine the game core as a model
+    environment = new HEnvironment();
+    environment.defineModel("game",coreSample);
+    
+    interpreter = new HInterpreter(environment,this);
+}
+```
+In the script you can use the sintax:
+> _cast_ "method" _from_ _\<model name\>_;
+> _cast_ "method" _from_ _\<model name\>_ _using_ \<value\>, \<value\> ...; 
+
+For example, if you game core has a function called "NextPlayerTurn" you can call it:
+```javascript
+cast "NextPlayerTurn" from game; 
+```
+
+If you game core has a function called "Attack" that recive two parameters, you can call it:
+```javascript
+cast "Attack" from game using card, target; 
+```
+If the function that you are calling not exist or have a especific number of arguments or the type of arguments aren't differentes, you will get a Exception from Hermertica's interpreter. You can add a lot of modules to integrate with the hermetica environment, but remember: you can only call functions but you will not recevie any return. Hermetica's interpreter understand that the game core api has a only input api and all output of the game must to be serialized in logs. This is the basic archtecture of a turn based game, and can not work well with real time game. But you can yet use to create a console tool to modify your game at development. 
+
+### Integrate game object or poco class
+You can also integrate a game object by add a new entity that represents that game. Check the example:
+```c#
+HEnvironment environment;
+HInterpreter interpreter;
+
+//the card object has a power property for example
+Card card;
+
+public void Start(){
+
+    //initializing the card and creating a entity
+    card = new Card();
+    Entity entity = new Entity(card);
+    
+    //initializing the enviroment and deine the game core as a model
+    environment = new HEnvironment();
+    environment.define("card",card);
+    
+    interpreter = new HInterpreter(environment,this);
+}
+```
+In the script, you can use the card like any entity:
+```javascript
+//change the power of card
+power of card to 3;
+
+//read the value of power of card
+define damage to power of card * 2;
+```
+But you can't add new properties or remove the properties of the card
+```javascript
+//throw a exception: This entity is fixed by enviroment. It haven't the property 'stamina'.
+add 3 to card as "stamina";
+
+//throw a exception: This entity is fixed by enviroment. You can't remove property of it.
+remove "power" from card;
+```
+You can add a lot of objects to the environment and modify its properties easily at runtime. But there is a limitation of type, you can only change the value of int and string types. Future updates will add recursive search to any filed of object.
+
+
+
+
+
+
+
+
+
+
