@@ -106,17 +106,17 @@ namespace HermeticaInterpreter{
             return value;
         }
         public object visitAssignEntityExpr(HExpression.AssignEntity expr) {
-            object entity = environment.get(expr.property.entity);
+            object entity = evaluate(expr.property.entity);
             object value = evaluate(expr.value);
             if(entity != null){
                 if(entity is Entity){
                     ((Entity)entity).Add(expr.property.property.lexeme,value);
-                    environment.assign(expr.property.entity,entity);
+                    //environment.assign(expr.property.entity,entity);
                 }else{
-                    throw new System.Exception(expr.property.entity.lexeme + " is not a entity is null");
+                    throw new System.Exception(expr.property + " is not a entity");
                 }
             }else{
-                throw new System.Exception("Entity is null");
+                throw new System.Exception("Expected entity is null");
             }
             return expr.value;
         }
@@ -152,7 +152,7 @@ namespace HermeticaInterpreter{
             return entity;
         }
         public object visitEntityPropertyExpr(HExpression.EntityProperty expr){
-            object entity = environment.get(expr.entity);
+            object entity = evaluate(expr.entity);
             if(entity is Entity){
                 return ((Entity)entity).Get(expr.property.lexeme);
             }

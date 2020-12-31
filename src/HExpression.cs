@@ -191,8 +191,8 @@ namespace HermeticaInterpreter{
         }
         public class EntityProperty : HExpression{
             public HToken property;
-            public HToken entity;
-            public EntityProperty(HToken property,HToken entity) {
+            public HExpression entity;
+            public EntityProperty(HToken property,HExpression entity) {
                 this.property = property;
                 this.entity = entity;
             }

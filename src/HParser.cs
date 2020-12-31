@@ -331,9 +331,12 @@ namespace HermeticaInterpreter{
             if (match(TOKEN.IDENTIFIER)) {
                 HToken name = previous();
                 if(match(TOKEN.OF)){
-                    consume(TOKEN.IDENTIFIER,"Read property expect a entity name");
-                    HToken value = previous();
-                    return new HExpression.EntityProperty(name,value);  
+                    //consume(TOKEN.IDENTIFIER,"Read property expect a entity name");
+                    HExpression value = primary();
+                    if(value is HExpression.EntityProperty || value is HExpression.Variable){
+                        return new HExpression.EntityProperty(name,value);  
+                    }
+                    throw new System.Exception("The property must to read from variable or other property.");
                 }
                 return new HExpression.Variable(previous());  
             }
@@ -371,7 +374,6 @@ namespace HermeticaInterpreter{
                 throw error(peek(), "Expect expression.");
             }
         }
-
         private HExpression.KeyValue keyValue(){
             if (match(TOKEN.IDENTIFIER)) {
                 HToken name = previous();
