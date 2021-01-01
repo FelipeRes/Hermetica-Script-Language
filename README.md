@@ -240,7 +240,7 @@ public class HermeticaConsole : MonoBehaviour, IConsole{
 You can attach this component to any GameObject and type code or send strings to test.
 
 ## Integration
-This language was created to communicate with a game core API. To understand more about read this [article](https://dev.to/feliperes/card-games-programming-1-game-core-4e8h) that I wrote. You can integrate your game by add your game core object to environmnet using the method _defineModel_.
+This language was created to communicate with a game core API. To understand more about reading this [article](https://dev.to/feliperes/card-games-programming-1-game-core-4e8h) that I wrote. You can integrate your game by adding your game core object to the environment using the method _defineModel_.
 ```c#
 HEnvironment environment;
 HInterpreter interpreter;
@@ -273,7 +273,7 @@ If you game core has a function called "Attack" that recive two parameters, you 
 ```javascript
 cast "Attack" from game using card, target; 
 ```
-If the function that you are calling not exist or have a especific number of arguments or the type of arguments aren't differentes, you will get a Exception from Hermertica's interpreter. You can add a lot of modules to integrate with the hermetica environment, but remember: you can only call functions but you will not recevie any return. Hermetica's interpreter understand that the game core api has a only input api and all output of the game must to be serialized in logs. This is the basic archtecture of a turn based game, and can not work well with real time game. But you can yet use to create a console tool to modify your game at development. 
+If the function that you are calling not exist or has a specific number of arguments or the type of arguments aren't different, you will get a Exception from Hermertica's interpreter. You can add a lot of modules to integrate with the hermetica environment, but remember: you can only call functions but you will not receive any return. Hermetica's interpreter understands that the game core api has only input api and all output of the game must be serialized in logs. This is the basic architecture of a turn-based game, and can not work well with real-time game. But you can yet use it to create a console tool to modify your game at development.
 
 ### Integrate game object or poco class
 You can also integrate a game object by add a new entity that represents that game. Check the example:
@@ -313,8 +313,11 @@ add 3 to card as "stamina";
 //throw a exception: This entity is fixed by enviroment. You can't remove property of it.
 remove "power" from card;
 ```
-You can add a lot of objects to the environment and modify its properties easily at runtime. But there is a limitation of type, you can only change the value of int and string types. Future updates will add recursive search to any filed of object.
+You can add a lot of objects to the environment and modify their properties easily at runtime. But there is a limitation of type, you can only change the value of int and string types. Future updates will add a recursive search to any field of the object.
 
+Thank you to Robert Nystrom.
+[Crafting interpreters book](http://www.craftinginterpreters.com/)
+[Crafting interpreters repository](https://craftinginterpreters.com/)
 
 
 
