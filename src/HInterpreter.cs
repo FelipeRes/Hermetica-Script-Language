@@ -413,7 +413,7 @@ namespace HermeticaInterpreter{
                 throw new System.Exception("Exprected a list type");
             }
         }
-        private string stringify(object obj) {
+        private string stringify(object obj,string tab = null) {
             if (obj == null) return "nil";
 
             if (obj is int) {
@@ -438,12 +438,12 @@ namespace HermeticaInterpreter{
                 string print = "Entity:\n";
                 Dictionary<string,object> dict = ((Entity)obj).keyPair;
                 foreach(KeyValuePair<string,object> key in dict){
-                    print += key.Key + " is ";
-                    print += stringify(key.Value);
+                    print += "\t"+tab+key.Key + " is ";
+                    print += stringify(key.Value,"\t");
                     print += "\n";
                 }
-                print += "end";
-                return print;
+                print += tab+"end";
+                return print.ToString();
             }
             return obj.ToString();
         }
