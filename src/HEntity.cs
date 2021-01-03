@@ -7,6 +7,9 @@ namespace HermeticaInterpreter{
             if(src.GetType().GetField(propName)!=null){
                 return src.GetType().GetField(propName).GetValue(src);
             }
+            if(src.GetType().GetProperty(propName)!=null){
+                return src.GetType().GetProperty(propName).GetValue(src);
+            }
             throw new System.Exception("This entity is fixed by enviroment. It haven't the property '"+propName+"'.");
             
         }

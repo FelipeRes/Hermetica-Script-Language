@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System;
-
 namespace HermeticaInterpreter{
     public class HInterpreter : HExpression.Visitor<object>, HStatement.Visitor<object>{
         public Environment environment;
-        private IConsole console;
+        public IConsole console;
         public HInterpreter(Environment environment, IConsole console){
             this.environment = environment;
             this.console = console;
@@ -301,8 +300,12 @@ namespace HermeticaInterpreter{
                     string name = (string)stmt.methodName.literal;
                     MethodInfo magicMethod = type.GetMethod(name,typeList.ToArray());
                     if(magicMethod!=null){
-                        magicMethod.Invoke(model,arguments.ToArray());
-                        return null;
+                        try{
+                            magicMethod.Invoke(model,arguments.ToArray());
+                            return null;
+                        }catch(Exception e){
+                            throw e.InnerException;
+                        }
                     }
                     throw new System.Exception("The function name " + stmt.model.lexeme + " does not exist");
                 }
